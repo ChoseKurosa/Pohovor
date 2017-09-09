@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +27,30 @@ public class PaymentTracker {
     }
 
     private void readFromFile(String fileName){
+        File file = new File(fileName);
+        BufferedReader reader = null;
+
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String parsedData[] = line.split(" ");
+                calculate(parsedData);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+
 
     }
 
@@ -55,7 +80,7 @@ public class PaymentTracker {
     private void showPayments(){
         for (Payment payment: payments)
         {
-            System.out.println(payment.getCurrency()+" "+payment.getAmount());
+            System.out.println(payment.getCurrency()+" "+String.format("%.0f",payment.getAmount()));
         }
     }
 
