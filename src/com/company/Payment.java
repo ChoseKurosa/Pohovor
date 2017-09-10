@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Class representing object which contains currency and amount(payment).
+ */
 public class Payment {
 
     private String currency;
