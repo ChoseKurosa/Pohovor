@@ -16,18 +16,18 @@ public class PaymentTracker {
         System.out.println("Type name of the file and press ENTER or just continue by pressing ENTER!");
         Scanner scanInput = new Scanner(System.in);
         String dataFromConsole;
+        Timer t = new Timer();
         dataFromConsole = scanInput.nextLine();
         if (!dataFromConsole.equals("")) readFromFile(dataFromConsole);
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                showPayments();
+            }
+        }, 60000, 60000);
         do {
-            Timer t = new Timer();
-            t.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    showPayments();
-                }
-            }, 60000, 60000);
+
             dataFromConsole = scanInput.nextLine();
-            t.cancel();
             String parsedData[] = dataFromConsole.split(" ");
             if (parsedData[0].equals("quit")) break; else
                 if (parsedData[0].matches("\\w[A-Z]{2}")) calculate(parsedData); else {
@@ -36,6 +36,7 @@ public class PaymentTracker {
                 }
 
              }while (true);
+        t.cancel();
         scanInput.close();
     }
 
