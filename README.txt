@@ -10,3 +10,5 @@ java com.company.Main
 
 Načítavanie vstupného textového súboru:
 súbor je vhodné uložiť do priečinka src a následne v programe zadať jeho celý názov
+
+Dokumentácia zdrojového kódu sa nachádza v priečinku javadoc.
